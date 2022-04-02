@@ -24,10 +24,9 @@ class NewsListActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = recycleLayoutManager
         val news: NewsViewModel by viewModels()
-        newsAdapter = NewsAdapter(news.news.value?.articles)
-        recyclerView.adapter = newsAdapter
         news.news.observe(this, { article ->
-            newsAdapter.notifyDataSetChanged()
+            newsAdapter = NewsAdapter(news.news.value?.articles)
+            recyclerView.adapter = newsAdapter
         })
     }
 }
