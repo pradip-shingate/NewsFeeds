@@ -11,7 +11,6 @@ import com.sample.newsfeeds.models.NewsViewModel
 
 
 class NewsListActivity : AppCompatActivity() {
-    private val viewModel: NewsViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_list)
@@ -24,9 +23,10 @@ class NewsListActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = recycleLayoutManager
         val news: NewsViewModel by viewModels()
+        newsAdapter = NewsAdapter()
+        recyclerView.adapter = newsAdapter
         news.news.observe(this, { article ->
-            newsAdapter = NewsAdapter(news.news.value?.articles)
-            recyclerView.adapter = newsAdapter
+            article.articles?.let { newsAdapter.setArticles(it) }
         })
     }
 }

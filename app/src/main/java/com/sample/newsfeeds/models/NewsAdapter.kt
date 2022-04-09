@@ -11,8 +11,17 @@ import com.bumptech.glide.request.RequestOptions
 import com.sample.newsfeeds.Article
 import com.sample.newsfeeds.R
 
-class NewsAdapter(private val dataset: List<Article>?) :
+class NewsAdapter :
     RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
+
+    private var dataset= mutableListOf<Article>()
+
+    fun setArticles(data:List<Article>)
+    {
+        this.dataset=data.toMutableList()
+        notifyDataSetChanged()
+    }
+
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imageView: ImageView = view.findViewById(R.id.image)
         val title: TextView = view.findViewById(R.id.title)
